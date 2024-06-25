@@ -39,6 +39,28 @@
       <restitution value="0.5"/>
     </contact>
   </link>
+
+  <link name="cables">
+    <!--
+      Add 150g point mass at the back of the robot for the cabling.
+      The total mass was measured at 2.65kg instead of the URDF mass of 2.5kg.
+    -->
+    <inertial>
+      <mass value="0.15"/>
+      <inertia ixx="0.0" ixy="0.0" ixz="0.0" iyy="0.0" iyz="0.0" izz="0.0"/>
+    </inertial>
+  </link>
+
+  <joint name="cable_mass_joint" type="fixed">
+    <!--
+      Set the cable point mass 20cm towards the robot's back.
+      This shifts the robot's COM to x = -1.1cm from the origin.
+    -->
+    <parent link="base_link"/>
+    <child link="cables"/>
+    <origin rpy="0 0 0" xyz="-0.20 0.0 0.0"/>
+  </joint>
+
   <!-- END BASE LINK -->
   <joint name="FL_HAA" type="revolute">
     <parent link="base_link"/>
